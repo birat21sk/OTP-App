@@ -8,7 +8,7 @@ const Home=({history, ...rest})=> {
   const [error, setError] =  useState(false);
   const [errorMsg, setErrorMsg] =  useState("");
   const CODE_LENGTH = 6; 
-  const apiEndPoint = "http://localhost:3000/api/validation"
+  const apiEndPoint = "/api/validation"
 
   const handleCodeChange = e =>{
     setCode(e.target.value);
