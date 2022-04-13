@@ -1,5 +1,4 @@
 import React, {useRef, useState, useEffect} from 'react';
- 
 
 const codeBoxWrapper = {
     width : "100%",
@@ -33,10 +32,9 @@ const hiddenTextInput = {
 const InputOTP = ({setCodeReady, code, setCode, maxLength }) => {
 
     const codeInputRef = useRef(null);
+    const [isInputFocused,setIsInputFocused] = useState(false);
 
     const codeArray = new Array(maxLength).fill(0);
-
-    const [isInputFocused,setIsInputFocused] = useState(false);
 
     const handleOnFocus = () =>{
         setIsInputFocused(true);

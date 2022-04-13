@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react"; 
-import {Redirect} from 'react-router-dom';
+import React, { useState} from "react"; 
 import axios from 'axios';
 import InputOTP from './InputOTP';
 
@@ -19,7 +18,6 @@ const Home=({history, ...rest})=> {
     e.preventDefault();
   
     const entry = { code:code, codeLength: CODE_LENGTH }
-
     axios.post(apiEndPoint,entry)
     .then(res => {  
       if(res.data.status === "success"){
