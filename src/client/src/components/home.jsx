@@ -21,8 +21,7 @@ const Home=({history, ...rest})=> {
     const entry = { code:code, codeLength: CODE_LENGTH }
 
     axios.post(apiEndPoint,entry)
-    .then(res => { 
-      console.log(res);
+    .then(res => {  
       if(res.data.status === "success"){
         setError(false); 
         history.replace("/success")
@@ -33,8 +32,7 @@ const Home=({history, ...rest})=> {
     })
     .catch(error => {
       console.log(error);
-    })
-    console.log(code, " Submitted");  
+    })  
   } 
 
   return (
