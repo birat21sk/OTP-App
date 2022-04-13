@@ -3,10 +3,9 @@ import {Redirect} from 'react-router-dom';
 import axios from 'axios';
 import InputOTP from './InputOTP';
 
-const Home=()=> { 
+const Home=({history, ...rest})=> {  
   const [code, setCode] = useState("");
   const [codeReady, setCodeReady] = useState(false);
-  const [redirect, setRedirect] = useState(true);
   const [error, setError] =  useState(false);
   const [errorMsg, setErrorMsg] =  useState("");
   const CODE_LENGTH = 6; 
@@ -25,11 +24,9 @@ const Home=()=> {
     .then(res => { 
       console.log(res);
       if(res.data.status === "success"){
-        setError(false);
-        setRedirect(true);
-        // hist.push("/success"); 
-      }else{
-        setRedirect(false);
+        setError(false); 
+        history.replace("/success")
+      }else{ 
         setError(true);
         setErrorMsg(res.data.error['message']);
       }
@@ -44,7 +41,7 @@ const Home=()=> {
     <React.Fragment>
       <div className="paper border mt">  
         <h1 className="mb-3">Verification Code</h1>
-        <form method="post" className="form" onSubmit={handleSubmit}>
+        <form className="form" onSubmit={handleSubmit}>
         <InputOTP 
           setCodeReady = {setCodeReady}
           code = {code}
