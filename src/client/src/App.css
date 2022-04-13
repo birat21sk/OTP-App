@@ -11,7 +11,7 @@
 }
 .paper{
     width:600px;
-    margin: 10% auto;
+    margin: 0 auto;
     display:flex;
     flex-direction:column;
     justify-content: center;
@@ -26,9 +26,23 @@
     font-size: 1.3rem!important;
     text-transform: uppercase;
 }
- 
+.btn-success-1{
+    background: rgba(81, 238, 99,1);
+    font-weight: "bold";
+}
 .form{
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+.mt{
+    margin-top:10%;
+}
+.error{
+    border: 1px solid rgba(238, 81, 81,1) !important;
+}
+.validation{
+    color: rgba(81, 238, 99,1);
+    border: 1px solid rgba(81, 238, 99,1);
+    box-shadow: 0 0 5px rgba(81, 238, 99,1);
 }

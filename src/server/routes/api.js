@@ -1,10 +1,14 @@
+const { validate } = require("../models/validation")
 const express = require("express");
 const router = express.Router();
 
-/* GET users listing. */
-router.get("/users", function(req, res, next) {
-  console.log('get "users" route hit');
-  res.send({ users: ["joe", "bernie", "tulsi", "donald", "bill"] });
+router.post("/validation", async (req, res) => {
+  const valRes = validate(req.body);
+  // if(error) return res.status(400).send(error.details[0].message)
+  if(valRes.error.message != "") return res.send(valRes);
+
+  res.send(valRes);
+
 });
 
 module.exports = router;
