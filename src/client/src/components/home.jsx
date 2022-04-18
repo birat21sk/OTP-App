@@ -51,7 +51,6 @@ const Home=({history, ...rest})=> {
         <h3>Verification Error</h3>
         {errorMsg} 
       </div>}
-      
     </React.Fragment>
   );
 }

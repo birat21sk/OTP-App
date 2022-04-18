@@ -5,16 +5,11 @@ import Success from "./components/success";
 import "./App.css";
 
 const App=()=> {
-  return (
-     <React.Fragment>
-       {/* <Home/> */}
-       <div className="content">
-         <Switch>
-          <Route path="/success" component={Success}/>
-          <Route path="/" component={Home}/>
-         </Switch>
-       </div>
-     </React.Fragment>
+  return ( 
+    <Switch>
+      <Route path="/success" component={Success}/>
+      <Route path="/" component={Home}/>
+    </Switch>  
   );
 }
 
