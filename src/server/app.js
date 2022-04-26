@@ -15,7 +15,7 @@ app.use(cookieParser());
 // mount our api router here
 app.use("/api", apiRouter);
 
-const whitelist = ['http://localhost:4000', 'http://localhost:8080', 'https://otp-blys.herokuapp.com']
+// const whitelist = ['http://localhost:4000', 'http://localhost:8080', 'https://otp-blys.herokuapp.com']
 
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, "../client/build")));

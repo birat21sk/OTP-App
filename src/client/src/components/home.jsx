@@ -1,5 +1,6 @@
 import React, { useState} from "react"; 
-import axios from 'axios';
+// import axios from 'axios';
+import api from '../services/apiCall';
 import InputOTP from './InputOTP';
 
 const Home=({history, ...rest})=> {  
@@ -18,9 +19,9 @@ const Home=({history, ...rest})=> {
     e.preventDefault();
   
     const entry = { code:code, codeLength: CODE_LENGTH }
-    axios.post(apiEndPoint,entry)
+    api.post(apiEndPoint,entry)
     .then(res => {  
-      if(res.data.status === "success"){
+      if(res.data.status === "200"){
         setError(false); 
         history.replace("/success")
       }else{ 
