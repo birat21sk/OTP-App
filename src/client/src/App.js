@@ -1,17 +1,19 @@
-import React from "react"; 
+import React, {Component} from "react";  
 import {Route, Switch} from 'react-router-dom'; 
-import Home from "./components/Home";
-import Success from "./components/Success";
 
 import "./App.css";
+import Home from "./pages/Home";
+import Success from "./pages/Success"; 
 
-const App=()=> { 
-  return ( 
-    <Switch>
-      <Route path="/success" component={Success}/>
-      <Route path="/" component={Home}/>
-    </Switch>  
-  );
-}
+class App extends Component {
+  render() { 
+    return (
+      <Switch>
+        <Route path="/success" component={Success}/>
+        <Route path="/" component={Home}/>
+      </Switch>
+    )
+  }
+} 
 
 export default App;

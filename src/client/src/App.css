@@ -46,3 +46,32 @@
     border: 1px solid rgba(81, 238, 99,1);
     box-shadow: 0 0 5px rgba(81, 238, 99,1);
 }
+
+
+.codeBoxWrapper{
+    width : 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.codeBox { 
+    /* minWidth:"20%", */
+    border-width:2px;
+    border-radius: 5%;
+    padding: 1rem;
+}
+.codeBoxInput { 
+    width:60px;
+    border-radius:10%;
+    font-size: 2rem;
+    font-weight: "bold";
+    text-align: center;
+}
+
+.hiddenTextInput {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+}

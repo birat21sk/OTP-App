@@ -1,6 +1,7 @@
-import React from "react";
-import { configureStore } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
+import React, {Component} from "react";
+import { configureStore } from "@reduxjs/toolkit";
+
 import otpReducer from "./reducer";
 
 const store = configureStore({
@@ -8,13 +9,16 @@ const store = configureStore({
         otp: otpReducer
     }
 });
-
-const StoreProvider = ({children: App}) =>{
-    return(
+ 
+class StoreProvider extends Component {
+  render() {
+    return (
         <Provider store={store}>
-            {App }
+            {this.props.children} 
         </Provider>
     )
-};
+  }
+}
 
+export const state = store;
 export default StoreProvider;
