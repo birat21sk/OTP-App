@@ -13,5 +13,5 @@ export const otpSlice = createSlice({
     }
 });
 
-export const {otpCodeUpdated, optCodeLengthUpdated, optCodeError} = otpSlice.actions;
+export const {otpCodeUpdated, optCodeError} = otpSlice.actions;
 export default otpSlice.reducer;
