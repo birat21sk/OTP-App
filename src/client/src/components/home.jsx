@@ -1,15 +1,25 @@
 import React, { useState} from "react"; 
-// import axios from 'axios';
+
 import api from '../services/apiCall';
 import InputOTP from './InputOTP';
+
+import apiUtils from '../utils/api.utils';
+import otpUtils from '../utils/otp.utils';
+
+const Status ={
+  SUCCESS: 200,
+  ERROR: 400  
+}
+Object.freeze(Status);
 
 const Home=({history, ...rest})=> {  
   const [code, setCode] = useState("");
   const [codeReady, setCodeReady] = useState(false);
   const [error, setError] =  useState(false);
   const [errorMsg, setErrorMsg] =  useState("");
-  const CODE_LENGTH = 6; 
-  const apiEndPoint = "/api/validation"
+
+  const CODE_LENGTH = otpUtils.getCodeLength();
+  const apiEndPoint = apiUtils.getApiEndPoint();
 
   const handleCodeChange = e =>{
     setCode(e.target.value);
@@ -19,14 +29,20 @@ const Home=({history, ...rest})=> {
     e.preventDefault();
   
     const entry = { code:code, codeLength: CODE_LENGTH }
+    
     api.post(apiEndPoint,entry)
     .then(res => {  
-      if(res.data.status === "200"){
+      if(res.data.status === Status.SUCCESS){
         setError(false); 
         history.replace("/success")
-      }else{ 
+      }
+      else if(res.data.status === Status.ERROR){ 
         setError(true);
         setErrorMsg(res.data.error['message']);
+      }
+      else{
+        setError(true);
+        setErrorMsg("Something went wrong");
       }
     })
     .catch(error => {

@@ -29,15 +29,18 @@ const Success = () =>{
         <div className="paper mt validation">
             <h1 className="display-4">Validation Success</h1>
         </div>
-        <div className="container d-flex flex-column justify-content-center align-items-center" style={{ marginTop: "2rem"}}>
-            <input name="inp" type="number" onChange={e => e.target.value}/>
-            {
-                table.map(({num,mul,result})=> {
-                    return (
-                        <span>{num}x{mul}:{result}</span>
-                    );
-                })
-            }  
+        <div className="paper mt">
+            <div className="container d-flex flex-column justify-content-center align-items-center" style={{ marginTop: "2rem"}}>
+                <input name="inp" type="number" onChange={e =>setNumber(e.target.value)}/>
+                { table?
+                    table.map(({num,mul,result})=> {
+                        return (
+                            <span>{num}x{mul}:{result}</span>
+                        );
+                    }) 
+                    : null
+                }  
+            </div>
         </div>
         
     </React.Fragment>
