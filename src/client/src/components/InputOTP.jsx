@@ -1,4 +1,5 @@
 import React, {useRef, useState, useEffect} from 'react';
+import { useSelector } from 'react-redux';
 
 const codeBoxWrapper = {
     width : "100%",
@@ -28,8 +29,8 @@ const hiddenTextInput = {
     opacity: "0"
 }
 
-
 const InputOTP = ({setCodeReady, code, setCode, maxLength }) => {
+    const otp = useSelector((state)=>state.code);
 
     const codeInputRef = useRef(null);
     const [isInputFocused,setIsInputFocused] = useState(false);

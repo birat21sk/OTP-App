@@ -1,10 +1,13 @@
-import React, { useState} from "react"; 
+import React, { useState, useEffect } from "react"; 
 
 import api from '../services/apiCall';
-import InputOTP from './InputOTP';
+import InputOTP from './InputOtp';
 
 import apiUtils from '../utils/api.utils';
 import otpUtils from '../utils/otp.utils';
+
+import { useSelector ,useDispatch } from "react-redux";
+import { optCodeError, otpCodeUpdated } from "../store/reducer";
 
 const Status ={
   SUCCESS: 200,
@@ -13,42 +16,44 @@ const Status ={
 Object.freeze(Status);
 
 const Home=({history, ...rest})=> {  
+  const otp = useSelector((state)=>state.otp);
+
   const [code, setCode] = useState("");
-  const [codeReady, setCodeReady] = useState(false);
-  const [error, setError] =  useState(false);
-  const [errorMsg, setErrorMsg] =  useState("");
+  const [codeReady, setCodeReady] = useState(false); 
 
   const CODE_LENGTH = otpUtils.getCodeLength();
   const apiEndPoint = apiUtils.getApiEndPoint();
 
+  const dispatch = useDispatch();
+
   const handleCodeChange = e =>{
-    setCode(e.target.value);
-  }    
+    setCode(e.target.value); 
+  }     
 
   const handleSubmit = e => {
     e.preventDefault();
-  
-    const entry = { code:code, codeLength: CODE_LENGTH }
-    
+    dispatch(otpCodeUpdated(code));
+    validateCode();
+  }
+ 
+  const validateCode= ()=>{ 
+    const entry = {code:code, codeLength:CODE_LENGTH};
     api.post(apiEndPoint,entry)
     .then(res => {  
       if(res.data.status === Status.SUCCESS){
-        setError(false); 
         history.replace("/success")
       }
       else if(res.data.status === Status.ERROR){ 
-        setError(true);
-        setErrorMsg(res.data.error['message']);
+        dispatch(optCodeError(res.data.error['message']));
       }
       else{
-        setError(true);
-        setErrorMsg("Something went wrong");
+        dispatch(optCodeError("Something wrong!"));
       }
     })
     .catch(error => {
       console.log(error);
     })  
-  } 
+  }
 
   return (
     <React.Fragment>
@@ -64,9 +69,9 @@ const Home=({history, ...rest})=> {
         <button className={"submitBtn btn btn-".concat(codeReady ? "success-1" : "outline-dark disabled")}>Submit</button>
         </form>
       </div>
-      {error && <div className="paper error text-danger">
+      {otp.error && <div className="paper error text-danger">
         <h3>Verification Error</h3>
-        {errorMsg} 
+        {otp.code}: {otp.error}  
       </div>}
     </React.Fragment>
   );
